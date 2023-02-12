@@ -7,8 +7,8 @@ RT1_Assignment #2
 <br>4- A node that subscribes to the robot's position and velocity using the custom message and prints the distance of the robot from the target and the robot's average speed. A parameter will be used to set the frequency of publishing the information. (node_c_sub).</br>
 <br>5- And to start the entire simulation, I created the launch file.</br>
 
-###### Nodes:
-<br>The nodes were created in the /script folder of a new package named Assignment2. And it was coded using Python. </br>
+# Nodes:
+The nodes were created in the /script folder of a new package named Assignment2. And it was coded using Python. 
 #### Action Client node:
 The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax 
 The script does the following:
