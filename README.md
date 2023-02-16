@@ -18,11 +18,29 @@ First of all I created the WorkSpace and in the /src file of the workspace I clo
 I created the python scripts for my nodes inside /assignmentpackage/scripts:
 
 #### Action Client node:
-The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax 
+The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax.
 The script does the following:
 <br>This node imports various modules, including rospy for ROS functionality, actionlib for creating the action client. </br>
 <br>Defines the action_client function, which creates an action client that connects to an action server at the /reaching_goal topic. The function then enters a loop that waits for keyboard input from the user. If the user enters c, the goal is cancelled. Otherwise, the user is prompted to enter the target position, which is then converted to a goal message and sent to the action server. If the user enter any letter different that 'c', it exit. </br>
-The PseudoCode of the 
+The PseudoCode of the this node can be the following :
+
+``` Define main function:
+    Initialize a client to send a goal to the '/reaching_goal' action server
+    Wait for the server to start
+    While True:
+        Ask the user to enter a position to navigate to
+        If the user types 'c', cancel the current goal and continue with the loop
+        Else if the user types 'q', break out of the loop
+        Otherwise, split the user input into a list of coordinates and convert to float
+        Create a new goal object
+        Set the position of the goal to the user input coordinates
+        Send the goal to the action server
+    
+If the script is being executed directly (i.e., not being imported as a module):
+    Initializing a new ROS node and naming it
+    Call the main function to start the program
+``` 
+
 
 
 
