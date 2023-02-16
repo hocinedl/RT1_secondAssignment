@@ -73,8 +73,7 @@ if this is the main module
 #### The service node (node_B):
 It is a node that subscribes to the '/reaching_goal/result_callback' topic and counts the number of goals that have been either reached or canceled. It also defines a ROS service server that returns the number of goals that have been canceled and reached so far. The global variables count_canceled and count_reached are updated in the callback function for the subscriber and are used to respond to the service request. Finally, the node is initialized and set to spin to handle callbacks.
 The Flowchart of the node is : 
-![Flowchart for node B](Flowchart - Page 2.png)
-
+![Flowchart for node B](Flowchart2.png)
 
 #### The Subscriber node:
 
