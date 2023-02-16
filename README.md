@@ -8,7 +8,14 @@ RT1_Assignment #2
 <br>5- And to start the entire simulation, I created the launch file that launches multiple ROS nodes and set their parameters.</br>
 
 # Nodes:
-First of all I created the WorkSpace and in the /src file of the work space I cloned the package Assignment_2_2022 and I created a new package which contains /scripts file, where I created the python scripts for my nodes:
+
+First of all I created the WorkSpace and in the /src file of the workspace I cloned the package Assignment_2_2022 and I created a new package which contains /scripts file.
+##### These are some useful commands for running nodes and setting up the workspace.
+<br> To build the workspace, we use the comand ``` catkin_make```.</br>
+<br> To run a node, we use the comand ``` rosrun <package_name> <node_name(executable)>```.</br>
+<br> To launch a file , we use the comand ``` rolaunch <package_name> <launch_file>```.</br>
+
+I created the python scripts for my nodes inside /assignmentpackage/scripts:
 
 #### Action Client node:
 The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax 
