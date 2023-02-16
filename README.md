@@ -1,10 +1,10 @@
 RT1_Assignment #2
 =================
 <br>This repository contains my solution for the second assignment of RT1 in which we were asked to create ROS nodes to perform specific tasks as follows (all the nodes were coded in python):</br> 
-<br>1- The first ROS node allows a user to input a target position for a robot to navigate to and he can also cancel the operation and stop the robot an reassign new target distination, it was implemented using an action client </br>
-<br>2- A node that publishes the robot's position and velocity as a custom message using values from the topic ``` python /odom ``` </br>
-<br>3- A service node that, when activated, prints the number of goals that have been reached and cancelled.I name it (node_b_service).</br>
-<br>4- A node that subscribes to the robot's position and velocity using the custom message and prints the distance of the robot from the target and the robot's average speed. A parameter will be used to set the frequency of publishing the information. (node_c_sub).</br>
+<br>1- The first ROS node allows a user to input a target position for a robot to navigate to and he can also cancel the operation and stop the robot an reassign new target distination, it was implemented using an action client (node_A1) </br>
+<br>2- A node that publishes the robot's position and velocity as a custom message using values from the topic ``` python /odom ``` (node_A2)</br>
+<br>3- A service node that, when activated, prints the number of goals that have been reached and cancelled.(node_B)</br>
+<br>4- A node that subscribes to the robot's position and velocity using the custom message and prints the distance of the robot from the target and the robot's average speed. A parameter will be used to set the frequency of publishing the information. (node_C).</br>
 <br>5- And to start the entire simulation, I created the launch file that launches multiple ROS nodes and set their parameters.</br>
 
 # Nodes:
@@ -17,7 +17,7 @@ First of all I created the WorkSpace and in the /src file of the workspace I clo
 
 I created the python scripts for my nodes inside /assignmentpackage/scripts:
 
-#### Action Client node:
+#### Action Client node (node_A1):
 The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax.
 The script does the following:
 <br>This node imports various modules, including rospy for ROS functionality, actionlib for creating the action client. </br>
@@ -47,27 +47,33 @@ The following is the corresponding Flowchart for this node:
 ![Flowchart for node A](Flowchart.png)
 
 
-#### The Publisher node:
-<br> This node actually is a part of the 1st node, It is a node that publishes the robot's current position and velocity as a custom message by subscribing to the /odom and /cmd_vel topics.</br>
-it defines the 'publisher' function, which is a callback for the odometry subscriber. This function takes in an odometry message, extracts the position and velocity data, and uses it to create a custom message. This custom message is then published.
-The pseudo code for this node is the following :
+#### The Publisher node (node_A2):
+<br> It is a node that publishes the robot's current position and velocity as a custom message by subscribing to the /odom topic.</br>
+when subscribing to /odom, it calls the callback function that is executed every time a message is received on the "/odom" topic. It creates a custom message of type "my_msg" and fills it with the current positions and velocities obtained from the received data. Then, it logs the received data using the "rospy.loginfo()" function, declares a publisher that publishes the custom message on the "position_and_velocity" topic, publishes the message using the "pub.publish()" method, and prints "Message published!" to the console.
+
  ``` 
-initialize node
-initialize publisher for custom message
-initialize subscriber to /odom topic
-initialize rate
-while node is running:
-    read robot position and velocity from /odom topic
-    update custom message fields with position and velocity information
-    publish custom message to topic
-    wait for rate to elapse  
+Subscriber Callback funtion
+    create a custom message called "msg"
+    set "msg.vel_x" to "data.twist.twist.linear.x"
+    set "msg.vel_y" to "data.twist.twist.linear.y"
+    set "msg.position_x" to "data.pose.pose.position.x"
+    set "msg.position_y" to "data.pose.pose.position.y"
+    create a publisher called "pub" that publishes to the topic "position_and_velocity".
+    publish "msg" using "pub"
+
+if this is the main module
+    initialize the node with the name "node_A2"
+    create a subscriber that subscribes to the topic "/odom" 
+    loop to run the node.
+ 
   ``` 
 
+ 
 
-
-#### The service node:
-This code is a Python script that uses the ROS (Robot Operating System) framework to create a service that keeps track of how many goals have been reached and how many goals have been cancelled by the robot. The script creates a service that listens to the /reaching_goal/result topic and counts the number of goals that have been cancelled and reached and it publish it.
-
+#### The service node (node_B):
+It is a node that subscribes to the '/reaching_goal/result_callback' topic and counts the number of goals that have been either reached or canceled. It also defines a ROS service server that returns the number of goals that have been canceled and reached so far. The global variables count_canceled and count_reached are updated in the callback function for the subscriber and are used to respond to the service request. Finally, the node is initialized and set to spin to handle callbacks.
+The Flowchart of the node is : 
+![Flowchart for node B](Flowchart - Page 2.png)
 
 
 #### The Subscriber node:
