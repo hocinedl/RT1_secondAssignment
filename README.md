@@ -105,3 +105,5 @@ initialize last_publish_time to the current time
 
 spin the node
 ``` 
+##### Launch File
+It provide a convenient way to start up multiple nodes and a master, as well as other initialization requirements such as setting parameters.
