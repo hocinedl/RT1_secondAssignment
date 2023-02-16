@@ -21,25 +21,30 @@ I created the python scripts for my nodes inside /assignmentpackage/scripts:
 The action client node is responsible for allowing the user to set a target or cancel it. I implemeted it using the action client syntax.
 The script does the following:
 <br>This node imports various modules, including rospy for ROS functionality, actionlib for creating the action client. </br>
-<br>Defines the action_client function, which creates an action client that connects to an action server at the /reaching_goal topic. The function then enters a loop that waits for keyboard input from the user. If the user enters c, the goal is cancelled. Otherwise, the user is prompted to enter the target position, which is then converted to a goal message and sent to the action server. If the user enter any letter different that 'c', it exit. </br>
+<br>Defines the action_client function, which creates an action client that connects to an action server at the /reaching_goal topic. The function then enters a loop thatask the user to choose between two choices of sending target or canceling it, if the user enter anything else than choices it exit. </br>
 The PseudoCode of the this node can be the following :
 ``` 
 Define main function:
+    creating and initializing node
     Initialize the client that send a goal to the action server.
-    Wait for the server to start.
+    call main function
     While True:
-        Ask the user to enter target (x,y).
-        If the user types 'c',it cancels
-        Else if the user types 'q', break out of the loop and quit the program.
-        Otherwise (else) ,
-        split the user input into a list of coordinates and convert to float
-        Create a new goal object
-        Set the position of the goal to the user input coordinates
-        Send the goal to the action server    
-If the script is being executed directly :
-    Initializing a ROS node and naming it
-    Calling the main function
+        Ask the user to enter choice
+        1. for sending goal
+        2. for canceling
+        If (choice = 1)
+           Ask user to set target
+           initializing the goal
+           sendGoal
+           send robot to desired target
+        elseif (choice = 2)
+            cancelGoal
+        else 
+            exit the program.
+            
 ``` 
+The following is the corresponding Flowchart for this node: 
+![Flowchart for node A](Flowchart.png)
 
 
 #### The Publisher node:
