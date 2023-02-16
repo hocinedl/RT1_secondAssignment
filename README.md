@@ -55,7 +55,8 @@ while node is running:
     read robot position and velocity from /odom topic
     update custom message fields with position and velocity information
     publish custom message to topic
-    wait for rate to elapse``` 
+    wait for rate to elapse  
+  ``` 
 
 
 
